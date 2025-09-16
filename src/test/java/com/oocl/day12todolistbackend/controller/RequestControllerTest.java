@@ -119,4 +119,22 @@ public class RequestControllerTest {
         mockMvcPerformPost(requestBody)
                 .andExpect(status().isUnprocessableEntity());
     }
+
+    @Test
+    void should_create_when_post_given_user_provides_id() throws Exception {
+        String requestBody = """
+                {
+                    "id": 100,
+                    "text": "task1",
+                    "done": false
+                }
+                """;
+        ResultActions resultActions = mockMvcPerformPost(requestBody);
+        int id = extractMockPostId(resultActions);
+
+        resultActions.andExpect((status().isCreated()))
+                .andExpect(jsonPath("$.id").value(id))
+                .andExpect(jsonPath("$.text").value("task1"))
+                .andExpect(jsonPath("$.done").value(false));
+    }
 }

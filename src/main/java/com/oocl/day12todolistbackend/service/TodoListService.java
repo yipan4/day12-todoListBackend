@@ -1,5 +1,6 @@
 package com.oocl.day12todolistbackend.service;
 
+import com.oocl.day12todolistbackend.dto.PostTodoReq;
 import com.oocl.day12todolistbackend.entity.Todo;
 import com.oocl.day12todolistbackend.exception.TodoListEmptyTextException;
 import com.oocl.day12todolistbackend.exception.TodoListMissingTextException;
@@ -18,7 +19,7 @@ public class TodoListService {
         todoListRepository.resetData();
     }
 
-    public Todo addTodo(Todo todo) {
+    public Todo addTodo(PostTodoReq todo) {
         if (todo.getText() == null) {
             throw new TodoListMissingTextException("Todo text is required");
         }

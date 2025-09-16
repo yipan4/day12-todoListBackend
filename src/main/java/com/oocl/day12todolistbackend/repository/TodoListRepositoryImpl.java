@@ -1,5 +1,6 @@
 package com.oocl.day12todolistbackend.repository;
 
+import com.oocl.day12todolistbackend.dto.PostTodoReq;
 import com.oocl.day12todolistbackend.entity.Todo;
 import com.oocl.day12todolistbackend.repository.dao.TodoListJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,11 @@ public class TodoListRepositoryImpl implements TodoListRepository{
     }
 
     @Override
-    public Todo addTodo(Todo todo) {
-        return repository.save(todo);
+    public Todo addTodo(PostTodoReq todo) {
+        Todo newTodo = new Todo();
+        newTodo.setText(todo.getText());
+        newTodo.setDone(todo.isDone());
+        return repository.save(newTodo);
     }
 
     @Override

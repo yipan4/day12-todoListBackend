@@ -1,5 +1,6 @@
 package com.oocl.day12todolistbackend.controller;
 
+import com.oocl.day12todolistbackend.dto.PostTodoReq;
 import com.oocl.day12todolistbackend.entity.Todo;
 import com.oocl.day12todolistbackend.service.TodoListService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class RequestController {
     }
 
     @PostMapping("/todos")
-    public ResponseEntity<Todo> addTodo(@RequestBody Todo todo) {
+    public ResponseEntity<Todo> addTodo(@RequestBody PostTodoReq todo) {
         return ResponseEntity.status(HttpStatus.CREATED).body(todoListService.addTodo(todo));
     }
 
