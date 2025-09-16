@@ -11,6 +11,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 
+import javax.print.attribute.standard.Media;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -219,5 +221,19 @@ public class RequestControllerTest {
                 .content(incompletePayload))
                 .andExpect(status().isUnprocessableEntity());
 
+    }
+
+    @Test
+    void should_delete_when_delete_given_id_exists() throws Exception {
+        String text = "task1";
+        boolean done = false;
+        String requestBody = requestBodyConstructor(text, done);
+        int id = mockAddTodo(requestBody);
+        mockMvc.perform(delete("/todos/{id}", id)
+                .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isNoContent())
+                .andExpect(jsonPath("$.id").value(id))
+                .andExpect(jsonPath("$.text").value(text))
+                .andExpect(jsonPath("$.done").value(done));
     }
 }

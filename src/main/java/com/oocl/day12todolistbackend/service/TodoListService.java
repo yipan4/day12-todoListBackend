@@ -54,4 +54,9 @@ public class TodoListService {
         }
         return foundTodo;
     }
+
+    public Todo deleteTodo(int id) {
+        Todo deletedTodo = todoListRepository.deleteTodo(id);
+        return deletedTodo;
+    }
 }

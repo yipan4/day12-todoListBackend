@@ -16,4 +16,6 @@ public interface TodoListRepository {
     Todo updateTodo(PutTodoReq todo);
 
     Todo findTodoById(int id);
+
+    Todo deleteTodo(int id);
 }

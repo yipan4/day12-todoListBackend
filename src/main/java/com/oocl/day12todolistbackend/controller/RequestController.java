@@ -4,6 +4,7 @@ import com.oocl.day12todolistbackend.dto.PostTodoReq;
 import com.oocl.day12todolistbackend.dto.PutTodoReq;
 import com.oocl.day12todolistbackend.entity.Todo;
 import com.oocl.day12todolistbackend.service.TodoListService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,4 +46,8 @@ public class RequestController {
         return ResponseEntity.status(HttpStatus.OK).body(todoListService.updateTodo(id, todo));
     }
 
+    @DeleteMapping("/todos/{id}")
+    public ResponseEntity<Todo> deleteTodo(@PathVariable int id) {
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(todoListService.deleteTodo(id));
+    }
 }

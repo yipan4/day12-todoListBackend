@@ -45,4 +45,13 @@ public class TodoListRepositoryImpl implements TodoListRepository{
     public Todo findTodoById(int id) {
         return repository.findById(id).orElse(null);
     }
+
+    @Override
+    public Todo deleteTodo(int id) {
+        Todo todoToDelete = repository.findById(id).orElse(null);
+        if (todoToDelete != null) {
+            repository.deleteById(id);
+        }
+        return todoToDelete;
+    }
 }
