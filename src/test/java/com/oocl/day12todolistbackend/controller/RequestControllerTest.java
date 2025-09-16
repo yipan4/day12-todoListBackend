@@ -107,4 +107,16 @@ public class RequestControllerTest {
                 .andExpect(jsonPath("$.text").value(text))
                 .andExpect(jsonPath("$.done").value(done));
     }
+
+    @Test
+    void should_return_422_when_post_given_no_text() throws Exception {
+        boolean done = false;
+        String requestBody = """
+                {
+                    "done": %b
+                }
+                """.formatted(done);
+        mockMvcPerformPost(requestBody)
+                .andExpect(status().isUnprocessableEntity());
+    }
 }

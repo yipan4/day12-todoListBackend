@@ -13,4 +13,10 @@ public class GlobalExceptionHandler {
     public String handleEmptyTextException(Exception e) {
         return e.getMessage();
     }
+
+    @ExceptionHandler(TodoListMissingTextException.class)
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    public String handleMissingTextException(Exception e) {
+        return e.getMessage();
+    }
 }

@@ -19,12 +19,12 @@ public class TodoListService {
     }
 
     public Todo addTodo(Todo todo) {
+        if (todo.getText() == null) {
+            throw new TodoListMissingTextException("Todo text is required");
+        }
         if (todo.getText().isEmpty()) {
             throw new TodoListEmptyTextException("Todo text cannot be empty");
         }
-//        if (todo.getText() == null) {
-//            throw new TodoListMissingTextException("Todo text is required");
-//        }
         return todoListRepository.addTodo(todo);
     }
 
