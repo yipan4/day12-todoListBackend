@@ -204,4 +204,20 @@ public class RequestControllerTest {
                         .content(updateRequestBody))
                 .andExpect(status().isNotFound());
     }
+
+    @Test
+    void should_reject_when_put_given_incomplete_payload() throws Exception {
+        String text = "task1";
+        boolean done = false;
+        String requestBody = requestBodyConstructor(text, done);
+        int id = mockAddTodo(requestBody);
+        String incompletePayload = """
+                {}
+                """;
+        mockMvc.perform(put("/todos/{id}", id)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content(incompletePayload))
+                .andExpect(status().isUnprocessableEntity());
+
+    }
 }

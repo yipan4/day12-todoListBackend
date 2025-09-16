@@ -36,6 +36,9 @@ public class TodoListService {
     }
 
     public Todo updateTodo(int id, PutTodoReq todo) {
+        if (todo.getText() == null) {
+            throw new TodoListMissingTextException("Todo text and done status are required");
+        }
         Todo existingTodo = todoListRepository.findTodoById(id);
         if (existingTodo == null) {
             throw new TodoNotFoundException("Todo with id " + id + " not found");

@@ -4,7 +4,7 @@ public class PostTodoReq {
     private String text;
     private boolean done;
 
-    public boolean isDone() {
+    public boolean getDone() {
         return done;
     }
 

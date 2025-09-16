@@ -23,7 +23,7 @@ public class TodoListRepositoryImpl implements TodoListRepository{
     public Todo addTodo(PostTodoReq todo) {
         Todo newTodo = new Todo();
         newTodo.setText(todo.getText());
-        newTodo.setDone(todo.isDone());
+        newTodo.setDone(todo.getDone());
         return repository.save(newTodo);
     }
 
@@ -37,7 +37,7 @@ public class TodoListRepositoryImpl implements TodoListRepository{
         Todo updatedTodo = new Todo();
         updatedTodo.setId(todo.getId());
         updatedTodo.setText(todo.getText());
-        updatedTodo.setDone(todo.isDone());
+        updatedTodo.setDone(todo.getDone());
         return repository.save(updatedTodo);
     }
 
