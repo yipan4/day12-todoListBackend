@@ -57,6 +57,9 @@ public class TodoListService {
 
     public Todo deleteTodo(int id) {
         Todo deletedTodo = todoListRepository.deleteTodo(id);
+        if (deletedTodo == null) {
+            throw new TodoNotFoundException("Todo with id " + id + " not found");
+        }
         return deletedTodo;
     }
 }

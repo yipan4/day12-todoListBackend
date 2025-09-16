@@ -236,4 +236,12 @@ public class RequestControllerTest {
                 .andExpect(jsonPath("$.text").value(text))
                 .andExpect(jsonPath("$.done").value(done));
     }
+
+    @Test
+    void should_return_404_when_delete_given_id_not_exist() throws Exception {
+        int id = 999;
+        mockMvc.perform(delete("/todos/{id}", id)
+                .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isNotFound());
+    }
 }
