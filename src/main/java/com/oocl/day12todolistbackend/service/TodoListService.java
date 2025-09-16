@@ -5,6 +5,8 @@ import com.oocl.day12todolistbackend.repository.TodoListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TodoListService {
     @Autowired
@@ -16,5 +18,9 @@ public class TodoListService {
 
     public Todo addTodo(Todo todo) {
         return todoListRepository.addTodo(todo);
+    }
+
+    public List<Todo> getTodos() {
+        return todoListRepository.getTodos();
     }
 }

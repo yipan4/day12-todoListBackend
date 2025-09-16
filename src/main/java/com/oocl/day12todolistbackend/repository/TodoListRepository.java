@@ -2,8 +2,12 @@ package com.oocl.day12todolistbackend.repository;
 
 import com.oocl.day12todolistbackend.entity.Todo;
 
-public interface TodoListRepository {
-    public void resetData();
+import java.util.List;
 
-    public Todo addTodo(Todo todo);
+public interface TodoListRepository {
+    void resetData();
+
+    Todo addTodo(Todo todo);
+
+    List<Todo> getTodos();
 }

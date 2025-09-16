@@ -68,12 +68,33 @@ public class RequestControllerTest {
                 .andExpect(jsonPath("$.done").value(done));
     }
 
-//    @Test
-//    void get_all_todos_when_get_given_request() throws Exception {
-//        mockMvc.perform(get("/api/todos")
-//                .contentType(MediaType.APPLICATION_JSON_VALUE))
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$.length()").value(3));
-//    }
+    @Test
+    void should_return_empty_list_when_get_given_empty_no_todos() throws Exception {
+        mockMvc.perform(get("/todos")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()").value(0));
+    }
 
+//    @Test
+//    void should_return_2_todos_when_get_given_2_todos() throws Exception {
+//        String text1 = "task1";
+//        boolean done1 = false;
+//        String requestBody1 = requestBodyConstructor(text1, done1);
+//        int id1 = mockAddTodo(requestBody1);
+//        String text2 = "task2";
+//        boolean done2 = true;
+//        String requestBody2 = requestBodyConstructor(text2, done2);
+//        int id2 = mockAddTodo(requestBody2);
+//
+//        mockMvc.perform(get("/todos")
+//                .contentType(MediaType.APPLICATION_JSON_VALUE))
+//                .andExpect(jsonPath("$.length()").value(2))
+//                .andExpect(jsonPath("$[0].id").value(id1))
+//                .andExpect(jsonPath("$[0].text").value(text1))
+//                .andExpect(jsonPath("$[0].done").value(done1))
+//                .andExpect(jsonPath("$[1].id").value(id2))
+//                .andExpect(jsonPath("$[1].text").value(text2))
+//                .andExpect(jsonPath("$[1].done").value(done2));
+    }
 }

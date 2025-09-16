@@ -5,6 +5,8 @@ import com.oocl.day12todolistbackend.repository.dao.TodoListJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class TodoListRepositoryImpl implements TodoListRepository{
     @Autowired
@@ -18,5 +20,10 @@ public class TodoListRepositoryImpl implements TodoListRepository{
     @Override
     public Todo addTodo(Todo todo) {
         return repository.save(todo);
+    }
+
+    @Override
+    public List<Todo> getTodos() {
+        return repository.findAll();
     }
 }
