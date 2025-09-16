@@ -35,6 +35,11 @@ public class RequestController {
         return todoListService.getTodos();
     }
 
+    @GetMapping("/todos/search/{id}")
+    public ResponseEntity<Todo> getTodoById(@PathVariable int id) {
+        return ResponseEntity.status(HttpStatus.OK).body(todoListService.findTodoById(id));
+    }
+
     @PutMapping("/todos/{id}")
     public ResponseEntity<Todo> updateTodo(@PathVariable int id, @RequestBody PutTodoReq todo) {
         return ResponseEntity.status(HttpStatus.OK).body(todoListService.updateTodo(id, todo));

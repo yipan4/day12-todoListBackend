@@ -43,6 +43,6 @@ public class TodoListRepositoryImpl implements TodoListRepository{
 
     @Override
     public Todo findTodoById(int id) {
-        return null;
+        return repository.findById(id).orElse(null);
     }
 }

@@ -165,4 +165,31 @@ public class RequestControllerTest {
                 .andExpect(jsonPath("$.text").value(text2))
                 .andExpect(jsonPath("$.done").value(done2));
     }
+
+    @Test
+    void should_only_update_path_id_todo_when_put_given_different_path_id_and_body_id() throws Exception {
+        String text1 = "task1";
+        boolean done1 = false;
+        String requestBody1 = requestBodyConstructor(text1, done1);
+        int id1 = mockAddTodo(requestBody1);
+        String text2 = "task2";
+        boolean done2 = false;
+        String requestBody2 = requestBodyConstructor(text2, done2);
+        int id2 = mockAddTodo(requestBody2);
+        String updatedText = "updated task1";
+        boolean updatedDone = true;
+        String updateRequestBody = requestBodyConstructor(updatedText, updatedDone);
+        mockMvc.perform(put("/todos/{id}", id1)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content(updateRequestBody))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(id1))
+                .andExpect(jsonPath("$.text").value(updatedText))
+                .andExpect(jsonPath("$.done").value(updatedDone));
+        mockMvc.perform(get("/todos/search/{id}", id2)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.text").value(text2))
+                .andExpect(jsonPath("$.done").value(done2));
+    }
 }
