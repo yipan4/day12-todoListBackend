@@ -36,10 +36,10 @@ public class TodoListService {
     }
 
     public Todo updateTodo(int id, PutTodoReq todo) {
-//        Todo existingTodo = todoListRepository.findTodoById(id);
-//        if (existingTodo == null) {
-//            throw new TodoNotFoundException("Todo with id " + id + " not found");
-//        }
+        Todo existingTodo = todoListRepository.findTodoById(id);
+        if (existingTodo == null) {
+            throw new TodoNotFoundException("Todo with id " + id + " not found");
+        }
         todo.setId(id);
         return todoListRepository.updateTodo(todo);
     }

@@ -192,4 +192,16 @@ public class RequestControllerTest {
                 .andExpect(jsonPath("$.text").value(text2))
                 .andExpect(jsonPath("$.done").value(done2));
     }
+
+    @Test
+    void should_reject_update_when_put_given_id_not_exist() throws Exception {
+        int nonExistentId = 999;
+        String updatedText = "updated task";
+        boolean updatedDone = true;
+        String updateRequestBody = requestBodyConstructor(updatedText, updatedDone);
+        mockMvc.perform(put("/todos/{id}", nonExistentId)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content(updateRequestBody))
+                .andExpect(status().isNotFound());
+    }
 }
