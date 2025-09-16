@@ -55,20 +55,6 @@ public class RequestControllerTest {
     }
 
     @Test
-    void should_add_todo_when_post_given_new_todo() throws Exception {
-        String text = "task1";
-        boolean done = false;
-        String requestBody = requestBodyConstructor(text, done);
-        ResultActions resultActions = mockMvcPerformPost(requestBody);
-        int id = extractMockPostId(resultActions);
-
-        resultActions.andExpect((status().isOk()))
-                .andExpect(jsonPath("$.id").value(id))
-                .andExpect(jsonPath("$.text").value(text))
-                .andExpect(jsonPath("$.done").value(done));
-    }
-
-    @Test
     void should_return_empty_list_when_get_given_empty_no_todos() throws Exception {
         mockMvc.perform(get("/todos")
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
@@ -97,5 +83,28 @@ public class RequestControllerTest {
                 .andExpect(jsonPath("$[1].id").value(id2))
                 .andExpect(jsonPath("$[1].text").value(text2))
                 .andExpect(jsonPath("$[1].done").value(done2));
+    }
+
+    @Test
+    void should_return_422_when_post_given_todo_empty_text() throws Exception {
+        String text = "";
+        boolean done = false;
+        String requestBody = requestBodyConstructor(text, done);
+        mockMvcPerformPost(requestBody)
+                .andExpect(status().isUnprocessableEntity());
+    }
+
+    @Test
+    void should_add_todo_when_post_given_new_todo() throws Exception {
+        String text = "task1";
+        boolean done = false;
+        String requestBody = requestBodyConstructor(text, done);
+        ResultActions resultActions = mockMvcPerformPost(requestBody);
+        int id = extractMockPostId(resultActions);
+
+        resultActions.andExpect((status().isCreated()))
+                .andExpect(jsonPath("$.id").value(id))
+                .andExpect(jsonPath("$.text").value(text))
+                .andExpect(jsonPath("$.done").value(done));
     }
 }

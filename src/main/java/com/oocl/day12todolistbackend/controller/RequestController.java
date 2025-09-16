@@ -3,6 +3,8 @@ package com.oocl.day12todolistbackend.controller;
 import com.oocl.day12todolistbackend.entity.Todo;
 import com.oocl.day12todolistbackend.service.TodoListService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,8 +24,8 @@ public class RequestController {
     }
 
     @PostMapping("/todos")
-    public Todo addTodo(@RequestBody Todo todo) {
-        return todoListService.addTodo(todo);
+    public ResponseEntity<Todo> addTodo(@RequestBody Todo todo) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(todoListService.addTodo(todo));
     }
 
     @GetMapping("/todos")
