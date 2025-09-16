@@ -54,6 +54,16 @@ public class RequestControllerTest {
                 """.formatted(text, done);
     }
 
+    String requestBodyWithIdConstructor(int id, String text, boolean done) {
+        return """
+                {
+                    "id": %d,
+                    "text": "%s",
+                    "done": %b
+                }
+                """.formatted(id, text, done);
+    }
+
     @Test
     void should_return_empty_list_when_get_given_empty_no_todos() throws Exception {
         mockMvc.perform(get("/todos")
@@ -136,5 +146,23 @@ public class RequestControllerTest {
                 .andExpect(jsonPath("$.id").value(id))
                 .andExpect(jsonPath("$.text").value("task1"))
                 .andExpect(jsonPath("$.done").value(false));
+    }
+
+    @Test
+    void should_update_text_done_when_put_given_updated_text_done() throws Exception {
+        String text = "task1";
+        boolean done = false;
+        String requestBody = requestBodyConstructor(text, done);
+        int id = mockAddTodo(requestBody);
+        String text2 = "updated task1";
+        boolean done2 = true;
+        String requestBody2 = requestBodyWithIdConstructor(id, text2, done2);
+        mockMvc.perform(put("/todos/{id}", id)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content(requestBody2))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(id))
+                .andExpect(jsonPath("$.text").value(text2))
+                .andExpect(jsonPath("$.done").value(done2));
     }
 }

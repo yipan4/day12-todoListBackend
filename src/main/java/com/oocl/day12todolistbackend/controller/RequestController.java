@@ -1,6 +1,7 @@
 package com.oocl.day12todolistbackend.controller;
 
 import com.oocl.day12todolistbackend.dto.PostTodoReq;
+import com.oocl.day12todolistbackend.dto.PutTodoReq;
 import com.oocl.day12todolistbackend.entity.Todo;
 import com.oocl.day12todolistbackend.service.TodoListService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-//import org.springframework.web.bind.annotation.CrossOrigin;
-//
-//@CrossOrigin
+import org.springframework.web.bind.annotation.CrossOrigin;
+
+@CrossOrigin
 @RestController
 public class RequestController {
     @Autowired
@@ -33,4 +34,10 @@ public class RequestController {
     public List<Todo> getTodos() {
         return todoListService.getTodos();
     }
+
+    @PutMapping("/todos/{id}")
+    public ResponseEntity<Todo> updateTodo(@PathVariable int id, @RequestBody PutTodoReq todo) {
+        return ResponseEntity.status(HttpStatus.OK).body(todoListService.updateTodo(id, todo));
+    }
+
 }

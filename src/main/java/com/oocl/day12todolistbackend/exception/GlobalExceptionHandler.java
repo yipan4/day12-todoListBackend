@@ -19,4 +19,10 @@ public class GlobalExceptionHandler {
     public String handleMissingTextException(Exception e) {
         return e.getMessage();
     }
+
+    @ExceptionHandler(TodoNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public String handleTodoNotFoundException(Exception e) {
+        return e.getMessage();
+    }
 }
