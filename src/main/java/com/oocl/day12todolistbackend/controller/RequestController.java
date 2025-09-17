@@ -25,6 +25,11 @@ public class RequestController {
         todoListService.resetData();
     }
 
+    @GetMapping("/health")
+    public String health() {
+        return "I'm healthy";
+    }
+
     @PostMapping("/todos")
     public ResponseEntity<Todo> addTodo(@RequestBody PostTodoReq todo) {
         return ResponseEntity.status(HttpStatus.CREATED).body(todoListService.addTodo(todo));
