@@ -4,7 +4,6 @@ import com.oocl.day12todolistbackend.dto.PostTodoReq;
 import com.oocl.day12todolistbackend.dto.PutTodoReq;
 import com.oocl.day12todolistbackend.entity.Todo;
 import com.oocl.day12todolistbackend.service.TodoListService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
