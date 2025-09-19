@@ -7,6 +7,7 @@ import com.oocl.day12todolistbackend.exception.TodoListEmptyTextException;
 import com.oocl.day12todolistbackend.exception.TodoListMissingTextException;
 import com.oocl.day12todolistbackend.exception.TodoNotFoundException;
 import com.oocl.day12todolistbackend.repository.TodoListRepository;
+import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,7 @@ public class TodoListService {
         todoListRepository.resetData();
     }
 
+    @Tool
     public Todo addTodo(PostTodoReq todo) {
         if (todo.getText() == null) {
             throw new TodoListMissingTextException("Todo text is required");
@@ -31,10 +33,12 @@ public class TodoListService {
         return todoListRepository.addTodo(todo);
     }
 
+    @Tool
     public List<Todo> getTodos() {
         return todoListRepository.getTodos();
     }
 
+    @Tool
     public Todo updateTodo(int id, PutTodoReq todo) {
         if (todo.getText() == null) {
             throw new TodoListMissingTextException("Todo text and done status are required");
@@ -47,6 +51,7 @@ public class TodoListService {
         return todoListRepository.updateTodo(todo);
     }
 
+    @Tool
     public Todo findTodoById(int id) {
         Todo foundTodo = todoListRepository.findTodoById(id);
         if (foundTodo == null) {
@@ -55,6 +60,7 @@ public class TodoListService {
         return foundTodo;
     }
 
+    @Tool
     public Todo deleteTodo(int id) {
         Todo deletedTodo = todoListRepository.deleteTodo(id);
         if (deletedTodo == null) {

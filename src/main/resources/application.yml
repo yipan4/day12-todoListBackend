@@ -1,6 +1,13 @@
 spring:
-  profiles:
-    active: ${SPRING_PROFILES_ACTIVE:local}
+  ai:
+    openai:
+      base-url: https://cloudsmartsearch-openai-east-us-2.openai.azure.com
+      api-key: b4a40a06ff46427faf52f6ad0f076491
+      chat:
+        options:
+          model: gpt-5-mini
+#  profiles:
+#    active: ${SPRING_PROFILES_ACTIVE:local}
   datasource:
     url: ${DATABASE_URL}
     username: ${MYSQL_USERNAME:root}

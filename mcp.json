@@ -1,0 +1,7 @@
+
+    "servers": {
+        "todo": {
+            "url": "http://localhost:8080/sse"
+        }
+    }
+}
